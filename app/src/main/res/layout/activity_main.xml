@@ -64,7 +64,8 @@
             android:hint="검색어를 입력하세요"
             android:inputType="text"
             android:linksClickable="false"
-            android:textColorHint="#FFFFFFFF" />
+            android:textColorHint="#FFFFFFFF"
+            android:textColor="#FFFFFFFF"/>
 
         <Button
             android:id="@+id/button"
@@ -218,7 +219,7 @@
         android:layout_height="wrap_content"
         android:background="#77000000"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <Button
             android:id="@+id/button2"
@@ -236,7 +237,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/FavoriteButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -254,7 +255,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/button3"
+            android:layout_below="@+id/FavoriteButton"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/menu_border"

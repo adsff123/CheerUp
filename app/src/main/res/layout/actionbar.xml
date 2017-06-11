@@ -14,11 +14,14 @@
         android:background="@drawable/img_menu"
         android:onClick="onCategoryMenuClicked" />
 
+
     <ImageView
+        android:id="@+id/HomeButton"
         android:layout_width="130dp"
         android:layout_height="35dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/img_banner"/>
+        android:background="@drawable/img_banner"
+        android:onClick="onHomeButtonClicked" />
 
     <ImageButton
         android:id="@+id/SearchButton"

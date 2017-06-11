@@ -1,5 +1,6 @@
 package org.androidtown.cheerup;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -60,8 +63,92 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //*****************************리스트뷰 끝***************************************
+
+
+        //*****************************메뉴이동 시작*************************************
+        Button FavoriteButton = (Button)findViewById(R.id.FavoriteButton);
+        FavoriteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
+                startActivity(intent);
+            }
+        });
+        //*****************************메뉴이동 끝 (현재안됨)*************************************
     }
 
+    //*****************************리스트뷰 시작*************************************
+    class SingerAdapter extends BaseAdapter{
+        ArrayList<SingerItem> items = new ArrayList<SingerItem>();
+
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        public void addItem(SingerItem item){
+            items.add(item);
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return items.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup viewGroup) {
+            SingerItemVIew view = new SingerItemVIew(getApplicationContext());
+            SingerItem item = items.get(position);
+            view.setName(item.getName());
+            view.setDate(item.getDate());
+            view.setImage(item.getResId());
+
+            return view;
+        }
+    }
+    //*****************************리스트뷰 끝***************************************
+
+
+    //*****************************액션바 시작******************************************
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        ActionBar actionBar = getSupportActionBar();
+
+        // Custom Actionbar를 사용하기 위해 CustomEnabled을 true 시키고 필요 없는 것은 false 시킨다
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);            //액션바 아이콘을 업 네비게이션 형태로 표시합니다.
+        actionBar.setDisplayShowTitleEnabled(false);        //액션바에 표시되는 제목의 표시유무를 설정합니다.
+        actionBar.setDisplayShowHomeEnabled(false);            //홈 아이콘을 숨김처리합니다.
+
+
+        //layout을 가지고 와서 actionbar에 포팅을 시킵니다.
+        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        View actionbar = inflater.inflate(R.layout.actionbar, null);
+        actionBar.setCustomView(actionbar);
+
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.argb(255,85,129,57)));
+
+        ImageView HomeButton = (ImageView)findViewById(R.id.HomeButton);
+        HomeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        return true;
+
+
+    }
+    //*****************************액션바 끝******************************************
+
+    //*****************************메뉴바 열기 시작***************************************
     public void onSearchMenuClicked(View v){
         openSearchMenu();
     }
@@ -99,65 +186,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    class SingerAdapter extends BaseAdapter{
-        ArrayList<SingerItem> items = new ArrayList<SingerItem>();
-
-        @Override
-        public int getCount() {
-            return items.size();
-        }
-
-        public void addItem(SingerItem item){
-            items.add(item);
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return items.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
-            SingerItemVIew view = new SingerItemVIew(getApplicationContext());
-            SingerItem item = items.get(position);
-            view.setName(item.getName());
-            view.setDate(item.getDate());
-            view.setImage(item.getResId());
-
-            return view;
-        }
-    }
-
-    //*****************************액션바 시작******************************************
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        ActionBar actionBar = getSupportActionBar();
-
-        // Custom Actionbar를 사용하기 위해 CustomEnabled을 true 시키고 필요 없는 것은 false 시킨다
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(false);            //액션바 아이콘을 업 네비게이션 형태로 표시합니다.
-        actionBar.setDisplayShowTitleEnabled(false);        //액션바에 표시되는 제목의 표시유무를 설정합니다.
-        actionBar.setDisplayShowHomeEnabled(false);            //홈 아이콘을 숨김처리합니다.
-
-
-        //layout을 가지고 와서 actionbar에 포팅을 시킵니다.
-        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-        View actionbar = inflater.inflate(R.layout.actionbar, null);
-        actionBar.setCustomView(actionbar);
-
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.argb(255,85,129,57)));
-        return true;
-
-
-    }
-    //*****************************액션바 끝******************************************
+    //*****************************메뉴바 열기 끝***************************************
 
 }
 
