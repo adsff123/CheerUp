@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     boolean isSearchMenuOpen =false;
+    boolean isCategoryMenuOpen=false;
     RelativeLayout SearchMenu;
+    RelativeLayout CategoryMenu;
 
 
     @Override
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
+        CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
 
         //*****************************리스트뷰 시작*************************************
         listView = (ListView) findViewById(R.id.listView);
@@ -60,17 +63,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearchMenuClicked(View v){
-        openMenu();
+        openSearchMenu();
     }
 
-    public void openMenu(){
+    public void openSearchMenu(){
         if(!isSearchMenuOpen) {
+            if(isCategoryMenuOpen){
+                CategoryMenu.setVisibility(View.INVISIBLE);
+                isCategoryMenuOpen = false;
+            }
             SearchMenu.setVisibility(View.VISIBLE);
             isSearchMenuOpen = true;
         }
         else if(isSearchMenuOpen){
             SearchMenu.setVisibility(View.INVISIBLE);
             isSearchMenuOpen = false;
+        }
+    }
+
+    public void onCategoryMenuClicked(View v){
+        openCategoryMenu();
+    }
+    public void openCategoryMenu(){
+        if(!isCategoryMenuOpen) {
+            if(isSearchMenuOpen){
+                SearchMenu.setVisibility(View.INVISIBLE);
+                isSearchMenuOpen = false;
+            }
+            CategoryMenu.setVisibility(View.VISIBLE);
+            isCategoryMenuOpen = true;
+        }
+        else if(isCategoryMenuOpen){
+            CategoryMenu.setVisibility(View.INVISIBLE);
+            isCategoryMenuOpen = false;
         }
     }
 
