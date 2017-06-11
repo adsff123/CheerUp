@@ -17,10 +17,12 @@
         android:background="@drawable/img_banner"/>
 
     <ImageButton
+        android:id="@+id/SearchButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:background="@drawable/img_search"/>
+        android:background="@drawable/img_search"
+        android:onClick="onFilterBtnClicked" />
 </RelativeLayout>

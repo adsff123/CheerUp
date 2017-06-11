@@ -23,11 +23,14 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     SingerAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //*****************************리스트뷰 시작*************************************
         listView = (ListView) findViewById(R.id.listView);
 
         adapter = new SingerAdapter();
@@ -48,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "선택 : " + item.getName(),Toast.LENGTH_LONG).show();
             }
         });
+
+        //*****************************리스트뷰 끝***************************************
+
+
+
+
+
     }
 
     class SingerAdapter extends BaseAdapter{
