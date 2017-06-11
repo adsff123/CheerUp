@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/searchMenu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
+    android:background="#77000000"
     android:orientation="horizontal"
-    android:background="#77000000">
+    android:visibility="visible">
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="224dp"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button"
+        android:layout_marginEnd="9dp"
+        android:layout_toStartOf="@+id/button"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="검색어를 입력하세요"
-        android:layout_alignBottom="@+id/button"
-        android:layout_toStartOf="@+id/button"
-        android:layout_marginEnd="9dp" />
+        android:text="검색어를 입력하세요" />
 
     <Button
         android:id="@+id/button"
@@ -26,8 +29,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginTop="20dp"
         android:background="#FFFFFFFF"
-        android:textSize="20dp"
-        android:text="검색" />
+        android:text="검색"
+        android:textSize="20dp" />
 
     <GridLayout
         android:layout_width="match_parent"
@@ -118,8 +121,6 @@
             android:background="#FFFFFFFF"
             android:text="검색"
             android:textSize="20dp" />
-
-
     </GridLayout>
 
 
