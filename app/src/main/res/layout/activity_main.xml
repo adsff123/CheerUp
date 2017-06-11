@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainContainer"
@@ -8,35 +8,209 @@
     android:orientation="vertical"
     tools:context="org.androidtown.cheerup.MainActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:gravity="center"
-        android:text="예정된 채용설명회"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-    <Switch
-        android:id="@+id/switch2"
-        android:layout_width="89dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:thumb="@drawable/switch_thumb_selector"
-        android:track="@drawable/switch_track_selector" />
-
-    <ListView
-        android:id="@+id/listView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="bottom">
+        android:orientation="vertical">
 
-    </ListView>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="center"
+            android:text="예정된 채용설명회"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="92dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/button"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:thumb="@drawable/switch_thumb_selector"
+            android:track="@drawable/switch_track_selector" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom">
+
+        </ListView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/searchMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="#77000000"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="224dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/button"
+            android:layout_marginEnd="9dp"
+            android:layout_toStartOf="@+id/button"
+            android:contextClickable="false"
+            android:cursorVisible="false"
+            android:hint="검색어를 입력하세요"
+            android:inputType="text"
+            android:linksClickable="false"
+            android:textColorHint="#FFFFFFFF" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="20dp"
+            android:background="#FFFFFFFF"
+            android:text="검색"
+            android:textSize="20dp" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:columnCount="3"
+            android:orientation="horizontal"
+            android:rowCount="6"
+            android:useDefaultMargins="true">
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_columnSpan="2"
+                android:layout_row="0"
+                android:text="전체선택"
+                android:textColor="#FFFFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="금융"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="IT"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="미디어"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="무역"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="생산·제조"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="서비스"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="유통"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="보험"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="건설"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="통신"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="외국계"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="기타"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_column="1"
+                android:layout_columnSpan="1"
+                android:layout_marginBottom="20dp"
+                android:layout_row="5"
+                android:background="#FFFFFFFF"
+                android:text="검색"
+                android:textSize="20dp" />
+        </GridLayout>
 
 
-</LinearLayout>
+    </RelativeLayout>
+
+
+</FrameLayout>

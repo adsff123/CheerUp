@@ -1,6 +1,5 @@
 package org.androidtown.cheerup;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,21 +12,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    int searchMenuIndex = 1;
     EditText editText;
     ListView listView;
     SingerAdapter adapter;
 
-    LinearLayout mainContainer;
 
+    boolean isSearchMenuOpen =false;
+    RelativeLayout SearchMenu;
 
 
     @Override
@@ -35,17 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*mainContainer = (LinearLayout) findViewById(R.id.mainContainer);
-        ImageButton btn = (ImageButton) findViewById(R.id.SearchButton);
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                inflater.inflate(R.layout.searchmenu_layout,mainContainer,true);
-                RelativeLayout searchMenu = (RelativeLayout) mainContainer.findViewById(R.id.searchMenu);
-                searchMenu.setVisibility(View.VISIBLE);
-            }
-        });*/
+        SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
 
         //*****************************리스트뷰 시작*************************************
         listView = (ListView) findViewById(R.id.listView);
@@ -68,13 +56,23 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "선택 : " + item.getName(),Toast.LENGTH_LONG).show();
             }
         });
-
-
         //*****************************리스트뷰 끝***************************************
-
-        //*****************************액션바 서치메뉴 시작******************************
     }
 
+    public void onSearchMenuClicked(View v){
+        openMenu();
+    }
+
+    public void openMenu(){
+        if(!isSearchMenuOpen) {
+            SearchMenu.setVisibility(View.VISIBLE);
+            isSearchMenuOpen = true;
+        }
+        else if(isSearchMenuOpen){
+            SearchMenu.setVisibility(View.INVISIBLE);
+            isSearchMenuOpen = false;
+        }
+    }
 
 
     class SingerAdapter extends BaseAdapter{
@@ -130,17 +128,6 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setCustomView(actionbar);
 
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.argb(255,85,129,57)));
-        mainContainer = (LinearLayout) findViewById(R.id.mainContainer);
-        ImageButton btn = (ImageButton) findViewById(R.id.SearchButton);
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                inflater.inflate(R.layout.searchmenu_layout,mainContainer,true);
-                Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
-
-            }
-        });
         return true;
 
 
