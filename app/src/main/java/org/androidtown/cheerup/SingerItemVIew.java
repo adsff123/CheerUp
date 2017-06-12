@@ -1,15 +1,12 @@
 package org.androidtown.cheerup;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-/**
- * Created by USER on 2017-06-10.
- */
 
 public class SingerItemVIew extends LinearLayout {
     TextView textView;
@@ -18,6 +15,10 @@ public class SingerItemVIew extends LinearLayout {
 
     public SingerItemVIew(Context context){
         super(context);
+        init(context);
+    }
+    public SingerItemVIew(Context context, AttributeSet attrs){
+        super(context, attrs);
         init(context);
     }
 
