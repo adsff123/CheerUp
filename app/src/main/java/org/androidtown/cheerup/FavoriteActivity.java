@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -59,7 +60,29 @@ public class FavoriteActivity extends AppCompatActivity {
         });
         //*****************************리스트뷰 끝***************************************
 
+        //*****************************좌측 메뉴이동 시작*************************************
+        Button FavoriteButton = (Button)findViewById(R.id.FavoriteButton);
+        FavoriteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button GotoMain = (Button)findViewById(R.id.GotoMain);
+        GotoMain.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //*****************************메뉴이동 끝 *************************************
+
     }
+
+
 
     //*****************************리스트뷰 시작*************************************
     class SingerAdapter extends BaseAdapter {

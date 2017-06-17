@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     ListView listView;
     SingerAdapter adapter;
+    TextView exception;
 
 
     boolean isSearchMenuOpen =false;
@@ -54,24 +56,31 @@ public class MainActivity extends AppCompatActivity {
         adapter.addItem(new SingerItem("(주)롯데그룹", "2017.06.08", R.drawable.star_big_off));
 
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SingerItem item = (SingerItem) adapter.getItem(position);
-                Toast.makeText(getApplicationContext(), "선택 : " + item.getName(), Toast.LENGTH_LONG).show();
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                Toast.makeText(getApplicationContext(), "선택 : ", Toast.LENGTH_LONG).show();
             }
         });
 
         //*****************************리스트뷰 끝***************************************
 
 
-        //*****************************메뉴이동 시작*************************************
+        //*****************************좌측 메뉴이동 시작*************************************
         Button FavoriteButton = (Button)findViewById(R.id.FavoriteButton);
         FavoriteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button GotoMain = (Button)findViewById(R.id.GotoMain);
+        GotoMain.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
             }
         });
