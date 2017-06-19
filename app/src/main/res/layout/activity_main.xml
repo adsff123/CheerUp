@@ -63,17 +63,25 @@
                 android:textColor="#FFFFFFFF" />
         </RadioGroup>
 
-        <ListView
-            android:id="@+id/listView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
+            android:layout_height="match_parent">
 
-        </ListView>
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            </ListView>
+
+            <ListView
+                android:id="@+id/listView_Suwon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
     </LinearLayout>
 
     <RelativeLayout

@@ -69,7 +69,7 @@ public class FavoriteActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button GotoMain = (Button)findViewById(R.id.GotoMain);
+        Button GotoMain = (Button)findViewById(R.id.GotoMain2);
         GotoMain.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

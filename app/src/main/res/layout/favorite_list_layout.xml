@@ -22,16 +22,46 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/toggle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/button"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:thumb="@drawable/switch_thumb_selector"
-            android:track="@drawable/switch_track_selector" />
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/pink_out_line"
+            android:checkedButton="@+id/offer"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="인사캠"
+                android:textColor="#FFFFFFFF" />
+
+            <RadioButton
+                android:id="@+id/offer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:text="자과캠"
+                android:textColor="#FFFFFFFF" />
+        </RadioGroup>
 
         <ListView
             android:id="@+id/FavoritelistView"
@@ -264,7 +294,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/GotoMain2"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
