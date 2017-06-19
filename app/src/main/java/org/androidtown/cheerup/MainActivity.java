@@ -13,17 +13,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
-import static org.androidtown.cheerup.R.id.listView_insa;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //*****************************리스트뷰 시작*************************************
-        listview_insa = (ListView) findViewById(listView_insa);
+        listview_insa = (ListView) findViewById(R.id.listView_insa);
         listView_Suwon = (ListView) findViewById(R.id.listView_Suwon);
 
         adapter = new SingerAdapter();
@@ -173,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, ViewGroup viewGroup) {
 
             SingerItemVIew view = new SingerItemVIew(getApplicationContext());
             SingerItem item = items.get(position);
@@ -183,19 +179,7 @@ public class MainActivity extends AppCompatActivity {
             view.setName(item.getName());
             view.setImage(item.getResId());
 
-            TextView textView = (TextView) convertView.findViewById(R.id.mainTextVIew1);
-            EditText editText = (EditText) convertView.findViewById(R.id.mainTextDate1);
-            ImageView imageView = (ImageView) convertView.findViewById(R.id.mainLikeButton1);
-
-            textView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
-                }
-            });
-
             return view;
-
 
         }
     }
