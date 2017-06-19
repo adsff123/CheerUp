@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,13 +27,19 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     ListView listView;
     SingerAdapter adapter;
+    SingerAdapter adapter2;
     TextView exception;
 
 
     boolean isSearchMenuOpen =false;
     boolean isCategoryMenuOpen=false;
+    boolean isInsaCampus = false;
+    boolean isJagaCampus = false;
     RelativeLayout SearchMenu;
     RelativeLayout CategoryMenu;
+    ListView listView_Suwon;
+    ListView listview_insa;
+
 
 
     @Override
@@ -43,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
         SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
         CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
 
+
         //*****************************리스트뷰 시작*************************************
-        listView = (ListView) findViewById(R.id.listView);
+        listview_insa = (ListView) findViewById(R.id.listView_insa);
+        listView_Suwon = (ListView) findViewById(R.id.listView_Suwon);
 
         adapter = new SingerAdapter();
 
@@ -55,14 +64,23 @@ public class MainActivity extends AppCompatActivity {
         adapter.addItem(new SingerItem("삼천리", "2017.06.02", R.drawable.star_big_off));
         adapter.addItem(new SingerItem("(주)롯데그룹", "2017.06.08", R.drawable.star_big_off));
 
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listview_insa.setAdapter(adapter);
+        listview_insa.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
                 Toast.makeText(getApplicationContext(), "선택 : ", Toast.LENGTH_LONG).show();
             }
         });
+
+        adapter2 = new SingerAdapter();
+
+        adapter2.addItem(new SingerItem("자과캠1","2017.05.05", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("자과캠2","2017.05.05", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("자과캠3","2017.05.05", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("자과캠4","2017.05.05", R.drawable.star_big_off));
+
+        listView_Suwon.setAdapter(adapter2);
 
         //*****************************리스트뷰 끝***************************************
 
@@ -86,6 +104,36 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //*****************************메뉴이동 끝 *************************************
+
+        //*****************************인사자과선택*************************************
+        RadioButton Insa = (RadioButton)findViewById(R.id.Insa);
+        Insa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isInsaCampus){
+                    if(isJagaCampus){
+                        listView_Suwon.setVisibility(View.INVISIBLE);
+                        isJagaCampus = false;
+                    }
+                    listview_insa.setVisibility(View.VISIBLE);
+                    isInsaCampus=true;
+                }
+            }
+        });
+        RadioButton Jaga = (RadioButton)findViewById(R.id.Jaga);
+        Jaga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isJagaCampus){
+                    if(isInsaCampus){
+                        listview_insa.setVisibility(View.INVISIBLE);
+                        isInsaCampus = false;
+                    }
+                    listView_Suwon.setVisibility(View.VISIBLE);
+                    isJagaCampus=true;
+                }
+            }
+        });
     }
 
     //*****************************리스트뷰 시작*************************************

@@ -29,11 +29,11 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/pink_out_line"
-            android:checkedButton="@+id/offer"
+            android:checkedButton="@+id/Jaga"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/search"
+                android:id="@+id/Insa"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="1dp"
@@ -48,7 +48,7 @@
                 android:textColor="#FFFFFFFF" />
 
             <RadioButton
-                android:id="@+id/offer"
+                android:id="@+id/Jaga"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="1dp"
@@ -63,12 +63,22 @@
                 android:textColor="#FFFFFFFF" />
         </RadioGroup>
 
-        <ListView
-            android:id="@+id/FavoritelistView"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </ListView>
+            <ListView
+                android:id="@+id/FavoritelistView_Jaga"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ListView
+                android:id="@+id/FavoritelistView_Insa"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </FrameLayout>
 
     </LinearLayout>
 

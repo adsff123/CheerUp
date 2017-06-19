@@ -29,7 +29,7 @@ public class FavoriteActivity extends AppCompatActivity {
     RelativeLayout SearchMenu;
     RelativeLayout CategoryMenu;
 
-    ListView listView;
+    ListView listView_Insa;
     SingerAdapter adapter;
 
     @Override
@@ -41,7 +41,7 @@ public class FavoriteActivity extends AppCompatActivity {
         CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
 
         //*****************************리스트뷰 시작*************************************
-        listView = (ListView) findViewById(R.id.FavoritelistView);
+        listView_Insa = (ListView) findViewById(R.id.FavoritelistView_Insa);
 
         adapter = new SingerAdapter();
 
@@ -49,9 +49,9 @@ public class FavoriteActivity extends AppCompatActivity {
         adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_on));
         adapter.addItem(new SingerItem("(주)롯데그룹", "2017.06.08", R.drawable.star_big_on));
 
-        listView.setAdapter(adapter);
+        listView_Insa.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView_Insa.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SingerItem item = (SingerItem) adapter.getItem(position);
