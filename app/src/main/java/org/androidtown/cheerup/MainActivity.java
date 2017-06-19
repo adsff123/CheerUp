@@ -23,13 +23,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static org.androidtown.cheerup.R.id.listView_insa;
+
 public class MainActivity extends AppCompatActivity {
-    EditText editText;
-    ListView listView;
+
     SingerAdapter adapter;
     SingerAdapter adapter2;
-    TextView exception;
-
 
     boolean isSearchMenuOpen =false;
     boolean isCategoryMenuOpen=false;
@@ -39,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout CategoryMenu;
     ListView listView_Suwon;
     ListView listview_insa;
+
 
 
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //*****************************리스트뷰 시작*************************************
-        listview_insa = (ListView) findViewById(R.id.listView_insa);
+        listview_insa = (ListView) findViewById(listView_insa);
         listView_Suwon = (ListView) findViewById(R.id.listView_Suwon);
 
         adapter = new SingerAdapter();
@@ -65,13 +65,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addItem(new SingerItem("(주)롯데그룹", "2017.06.08", R.drawable.star_big_off));
 
         listview_insa.setAdapter(adapter);
-        listview_insa.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                Toast.makeText(getApplicationContext(), "선택 : ", Toast.LENGTH_LONG).show();
-            }
-        });
 
         adapter2 = new SingerAdapter();
 
@@ -81,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         adapter2.addItem(new SingerItem("자과캠4","2017.05.05", R.drawable.star_big_off));
 
         listView_Suwon.setAdapter(adapter2);
+
+        //---리스트뷰 클릭-----
+
+        listview_insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
+            }
+        });
 
         //*****************************리스트뷰 끝***************************************
 
@@ -129,12 +132,22 @@ public class MainActivity extends AppCompatActivity {
                         listview_insa.setVisibility(View.INVISIBLE);
                         isInsaCampus = false;
                     }
+                    if(!isInsaCampus){
+                        listview_insa.setVisibility(View.INVISIBLE);
+                        isInsaCampus = false;
+                    }
                     listView_Suwon.setVisibility(View.VISIBLE);
                     isJagaCampus=true;
                 }
             }
         });
+        //*****************************인사자과선택 끝*************************************
+
     }
+
+
+
+
 
     //*****************************리스트뷰 시작*************************************
     class SingerAdapter extends BaseAdapter{
@@ -160,17 +173,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
+        public View getView(int position, View convertView, ViewGroup parent) {
+
             SingerItemVIew view = new SingerItemVIew(getApplicationContext());
             SingerItem item = items.get(position);
-            view.setName(item.getName());
+
+
             view.setDate(item.getDate());
+            view.setName(item.getName());
             view.setImage(item.getResId());
 
+            TextView textView = (TextView) convertView.findViewById(R.id.mainTextVIew1);
+            EditText editText = (EditText) convertView.findViewById(R.id.mainTextDate1);
+            ImageView imageView = (ImageView) convertView.findViewById(R.id.mainLikeButton1);
+
+            textView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
+                }
+            });
+
             return view;
+
+
         }
     }
     //*****************************리스트뷰 끝***************************************
+
+
+
 
 
     //*****************************액션바 시작******************************************

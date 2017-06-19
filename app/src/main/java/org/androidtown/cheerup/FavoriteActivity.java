@@ -16,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -30,7 +31,11 @@ public class FavoriteActivity extends AppCompatActivity {
     RelativeLayout CategoryMenu;
 
     ListView listView_Insa;
+    ListView listView_Jaga;
+    boolean isInsaCampus = false;
+    boolean isJagaCampus = false;
     SingerAdapter adapter;
+    SingerAdapter adapter2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,8 +47,10 @@ public class FavoriteActivity extends AppCompatActivity {
 
         //*****************************리스트뷰 시작*************************************
         listView_Insa = (ListView) findViewById(R.id.FavoritelistView_Insa);
+        listView_Jaga = (ListView) findViewById(R.id.FavoritelistView_Jaga);
 
         adapter = new SingerAdapter();
+        adapter2 = new SingerAdapter();
 
         adapter.addItem(new SingerItem("금융감독원", "2017.05.18", R.drawable.star_big_on));
         adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_on));
@@ -58,6 +65,15 @@ public class FavoriteActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "선택 : " + item.getName(),Toast.LENGTH_LONG).show();
             }
         });
+
+
+
+        adapter2.addItem(new SingerItem("자과좋아요1", "2017.05.18", R.drawable.star_big_on));
+        adapter2.addItem(new SingerItem("자과좋아요2", "2017.05.18", R.drawable.star_big_on));
+        adapter2.addItem(new SingerItem("자과좋아요3", "2017.05.18", R.drawable.star_big_on));
+
+        listView_Jaga.setAdapter(adapter2);
+
         //*****************************리스트뷰 끝***************************************
 
         //*****************************좌측 메뉴이동 시작*************************************
@@ -79,6 +95,41 @@ public class FavoriteActivity extends AppCompatActivity {
         });
 
         //*****************************메뉴이동 끝 *************************************
+
+        //*****************************인사자과선택*************************************
+        RadioButton Insa = (RadioButton)findViewById(R.id.Insa);
+        Insa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isInsaCampus){
+                    if(isJagaCampus){
+                        listView_Jaga.setVisibility(View.INVISIBLE);
+                        isJagaCampus = false;
+                    }
+                    listView_Insa.setVisibility(View.VISIBLE);
+                    isInsaCampus=true;
+                }
+            }
+        });
+        RadioButton Jaga = (RadioButton)findViewById(R.id.Jaga);
+        Jaga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isJagaCampus){
+                    if(!isInsaCampus){
+                        listView_Insa.setVisibility(View.INVISIBLE);
+                        isInsaCampus = false;
+                    }
+                    if(isInsaCampus){
+                        listView_Insa.setVisibility(View.INVISIBLE);
+                        isInsaCampus = false;
+                    }
+                    listView_Jaga.setVisibility(View.VISIBLE);
+                    isJagaCampus=true;
+                }
+            }
+        });
+        //*****************************인사자과선택 끝*************************************
 
     }
 
