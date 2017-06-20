@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "396558435637",
+    "firebase_url": "https://cheerup-5a958.firebaseio.com",
+    "project_id": "cheerup-5a958",
+    "storage_bucket": "cheerup-5a958.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396558435637:android:6d0bc597a5aeb1d9",
+        "android_client_info": {
+          "package_name": "org.androidtown.cheerup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396558435637-nerdj84a422ep46pi5h3vca9hkv1icrn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvYfiMAVBU_2iOaKsBGbT1YJ-f5vMzkdM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
