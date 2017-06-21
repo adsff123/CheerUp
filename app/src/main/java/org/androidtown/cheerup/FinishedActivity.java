@@ -22,9 +22,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
-public class FavoriteActivity extends AppCompatActivity {
-
+public class FinishedActivity extends AppCompatActivity {
     boolean isSearchMenuOpen =false;
     boolean isCategoryMenuOpen=false;
     RelativeLayout SearchMenu;
@@ -40,14 +38,14 @@ public class FavoriteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.favorite_list_layout);
+        setContentView(R.layout.finished_recruit_layout);
 
         SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
         CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
 
         //*****************************리스트뷰 시작*************************************
-        listView_Insa = (ListView) findViewById(R.id.FavoritelistView_Insa);
-        listView_Jaga = (ListView) findViewById(R.id.FavoritelistView_Jaga);
+        listView_Insa = (ListView) findViewById(R.id.finished_Insa);
+        listView_Jaga = (ListView) findViewById(R.id.finished_Jaga);
 
         adapter = new SingerAdapter();
         adapter2 = new SingerAdapter();
@@ -147,10 +145,8 @@ public class FavoriteActivity extends AppCompatActivity {
         });
         //*****************************인사자과선택 끝*************************************
 
+
     }
-
-
-
     //*****************************리스트뷰 시작*************************************
     class SingerAdapter extends BaseAdapter {
         ArrayList<SingerItem> items = new ArrayList<SingerItem>();
@@ -260,9 +256,4 @@ public class FavoriteActivity extends AppCompatActivity {
     }
 
     //*****************************메뉴바 열기 끝***************************************
-
-
-
 }
-
-

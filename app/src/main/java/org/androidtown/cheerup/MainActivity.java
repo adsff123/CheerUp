@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         listview_insa = (ListView) findViewById(R.id.listView_insa);
         listView_Suwon = (ListView) findViewById(R.id.listView_Suwon);
 
+
         adapter = new SingerAdapter();
 
         adapter.addItem(new SingerItem("금융감독원", "2017.05.18", R.drawable.star_big_off));
@@ -77,8 +79,15 @@ public class MainActivity extends AppCompatActivity {
         listview_insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SingerItem item = (SingerItem) adapter.getItem(position);
-                Toast.makeText(getApplicationContext(), "선택 : " + item.getName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "hi",Toast.LENGTH_LONG).show();
+                System.out.println("hi");
+            }
+        });
+        listView_Suwon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
+                Log.v("SCHEMA", "onItemClick fired!");
             }
         });
 
@@ -86,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         //*****************************좌측 메뉴이동 시작*************************************
+        Button Setting = (Button)findViewById(R.id.Setting);
+        Setting.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),SettingActivity.class);
+                startActivity(intent);
+            }
+        });
         Button FavoriteButton = (Button)findViewById(R.id.FavoriteButton);
         FavoriteButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -99,6 +116,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button Finisehd = (Button)findViewById(R.id.Finished);
+        Finisehd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),FinishedActivity.class);
                 startActivity(intent);
             }
         });
@@ -167,6 +192,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public long getItemId(int position) {
             return position;
+        }
+
+        @Override
+        public boolean isEnabled(int position) {
+            return false;
         }
 
         @Override

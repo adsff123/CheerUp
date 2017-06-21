@@ -263,7 +263,7 @@
         android:visibility="invisible">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/Setting"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -282,7 +282,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/button2"
+            android:layout_below="@+id/Setting"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/menu_border"
@@ -292,7 +292,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/Finished"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -310,7 +310,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/button4"
+            android:layout_below="@+id/Finished"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
