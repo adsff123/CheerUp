@@ -54,9 +54,9 @@ public class FinishedActivity extends AppCompatActivity {
         adapter = new SingerAdapter();
         adapter2 = new SingerAdapter();
 
-        adapter.addItem(new SingerItem("금융감독원", "2017.05.18", R.drawable.star_big_off));
-        adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_off));
-        adapter.addItem(new SingerItem("(주)롯데그룹", "2017.06.08", R.drawable.star_big_on));
+        adapter.addItem(new SingerItem("현대해상", "2017.04.18", R.drawable.star_big_off));
+        adapter.addItem(new SingerItem("현대오토에버", "2017.04.26", R.drawable.star_big_off));
+        adapter.addItem(new SingerItem("LG U+", "2017.04.30", R.drawable.star_big_on));
 
         listView_Insa.setAdapter(adapter);
 
@@ -69,12 +69,26 @@ public class FinishedActivity extends AppCompatActivity {
         });
 
 
-
-        adapter2.addItem(new SingerItem("현대오토에버", "2017.05.18", R.drawable.star_big_off));
-        adapter2.addItem(new SingerItem("삼성SDS", "2017.05.18", R.drawable.star_big_off));
-        adapter2.addItem(new SingerItem("SK C&C", "2017.05.18", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("현대오토에버", "2017.04.27", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("삼성SDS", "2017.04.28", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("SK C&C", "2017.04.29", R.drawable.star_big_off));
 
         listView_Jaga.setAdapter(adapter2);
+
+        listView_Insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
+        listView_Jaga.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //*****************************리스트뷰 끝***************************************
 

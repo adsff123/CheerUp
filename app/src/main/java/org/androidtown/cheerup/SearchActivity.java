@@ -22,7 +22,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -70,21 +69,27 @@ public class SearchActivity extends AppCompatActivity {
 
         listView_Insa.setAdapter(adapter);
 
-        listView_Insa.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SingerItem item = (SingerItem) adapter.getItem(position);
-                Toast.makeText(getApplicationContext(), "선택 : " + item.getName(),Toast.LENGTH_LONG).show();
-            }
-        });
-
-
 
         adapter2.addItem(new SingerItem("suwon-hi-1", "2017.05.18", R.drawable.star_big_off));
         adapter2.addItem(new SingerItem("suwon-hi-2", "2017.05.18", R.drawable.star_big_off));
         adapter2.addItem(new SingerItem("suwon-hi-3", "2017.05.18", R.drawable.star_big_off));
 
         listView_Jaga.setAdapter(adapter2);
+
+        listView_Insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
+        listView_Jaga.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //*****************************리스트뷰 끝***************************************
 

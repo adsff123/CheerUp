@@ -55,9 +55,9 @@ public class FilterActivity extends AppCompatActivity {
         adapter = new SingerAdapter();
         adapter2 = new SingerAdapter();
 
-        adapter.addItem(new SingerItem("금융감독원", "2017.05.18", R.drawable.star_big_on));
+        adapter.addItem(new SingerItem("롯데닷컴", "2017.05.18", R.drawable.star_big_on));
         adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_on));
-        adapter.addItem(new SingerItem("(주)롯데그룹", "2017.06.08", R.drawable.star_big_on));
+        adapter.addItem(new SingerItem("금융감독원", "2017.05.28", R.drawable.star_big_on));
 
         listView_Insa.setAdapter(adapter);
 
@@ -77,6 +77,20 @@ public class FilterActivity extends AppCompatActivity {
 
         listView_Jaga.setAdapter(adapter2);
 
+        listView_Insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
+        listView_Jaga.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
         //*****************************리스트뷰 끝***************************************
         //*****************************취소버튼 시작*************************************
         TextView CancelBtn = (TextView)findViewById(R.id.CancelBtn);

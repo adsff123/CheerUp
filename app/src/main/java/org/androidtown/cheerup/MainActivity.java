@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -20,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new SingerAdapter();
 
-        adapter.addItem(new SingerItem("금융감독원", "2017.05.18", R.drawable.star_big_off));
+        adapter.addItem(new SingerItem("롯데닷컴", "2017.05.18", R.drawable.star_big_off));
         adapter.addItem(new SingerItem("(주)한국존슨앤드존슨", "2017.05.20", R.drawable.star_big_off));
         adapter.addItem(new SingerItem("한국주택금융공사", "2017.05.25", R.drawable.star_big_off));
         adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_off));
@@ -83,17 +81,15 @@ public class MainActivity extends AppCompatActivity {
         listview_insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
                 startActivity(intent);
             }
         });
-        listView_Suwon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView_Suwon.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
-                Log.v("SCHEMA", "onItemClick fired!");
+                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -267,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean isEnabled(int position) {
-            return false;
+            return true;
         }
 
         @Override
