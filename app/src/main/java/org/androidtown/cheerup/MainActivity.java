@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         listview_insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
                 startActivity(intent);
             }
