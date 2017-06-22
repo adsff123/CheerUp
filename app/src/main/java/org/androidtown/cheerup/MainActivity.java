@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -151,6 +152,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //****체크박스****
+        final CheckBox cbAll = (CheckBox)findViewById(R.id.cbAll);
+        final CheckBox cb1 = (CheckBox)findViewById(R.id.cb1);
+        final CheckBox cb2 = (CheckBox)findViewById(R.id.cb2);
+        final CheckBox cb3 = (CheckBox)findViewById(R.id.cb3);
+        final CheckBox cb4 = (CheckBox)findViewById(R.id.cb4);
+        final CheckBox cb5 = (CheckBox)findViewById(R.id.cb5);
+        final CheckBox cb6 = (CheckBox)findViewById(R.id.cb6);
+        final CheckBox cb7 = (CheckBox)findViewById(R.id.cb7);
+        final CheckBox cb8 = (CheckBox)findViewById(R.id.cb8);
+        final CheckBox cb9 = (CheckBox)findViewById(R.id.cb9);
+        final CheckBox cb10 = (CheckBox)findViewById(R.id.cb10);
+        final CheckBox cb11 = (CheckBox)findViewById(R.id.cb11);
+        final CheckBox cb12 = (CheckBox)findViewById(R.id.cb12);
+
+        cbAll.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(cbAll.isChecked()){
+                    cb1.setChecked(true);
+                    cb2.setChecked(true);
+                    cb3.setChecked(true);
+                    cb4.setChecked(true);
+                    cb5.setChecked(true);
+                    cb6.setChecked(true);
+                    cb7.setChecked(true);
+                    cb8.setChecked(true);
+                    cb9.setChecked(true);
+                    cb10.setChecked(true);
+                    cb11.setChecked(true);
+                    cb12.setChecked(true);
+
+                }
+                else{
+                    cb1.setChecked(false);
+                    cb2.setChecked(false);
+                    cb3.setChecked(false);
+                    cb4.setChecked(false);
+                    cb5.setChecked(false);
+                    cb6.setChecked(false);
+                    cb7.setChecked(false);
+                    cb8.setChecked(false);
+                    cb9.setChecked(false);
+                    cb10.setChecked(false);
+                    cb11.setChecked(false);
+                    cb12.setChecked(false);
+                }
+            }
+        });
 
         //*****************************우측 검색 및 필터 끝*****************************
         //*****************************인사자과선택*************************************
