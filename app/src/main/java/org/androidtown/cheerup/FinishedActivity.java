@@ -78,8 +78,15 @@ public class FinishedActivity extends AppCompatActivity {
         listView_Insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
-                startActivity(intent);
+                SingerItem pos = (SingerItem) adapter.getItem(position);
+                if(pos.getName()=="HOPES"){
+                    Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(),DetailActivity3.class);
+                    startActivity(intent);
+                }
             }
         });
         listView_Jaga.setOnItemClickListener(new AdapterView.OnItemClickListener(){

@@ -4,111 +4,156 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class DetailActivity3 extends AppCompatActivity {
 
-    SingerAdapter adapter;
-    SingerAdapter adapter2;
-
+    ScrollView scrollView;
     boolean isSearchMenuOpen =false;
     boolean isCategoryMenuOpen=false;
-    boolean isInsaCampus = false;
-    boolean isJagaCampus = false;
     RelativeLayout SearchMenu;
     RelativeLayout CategoryMenu;
-    ListView listView_Suwon;
-    ListView listview_insa;
 
     EditText SearchV;
-    ImageView mainLikeButton1;
+
+    //*************firebase를 이용한 댓글*******************
+    // DB에 저장시킬 데이터를 입력받는 EditText
+    private EditText reply_text;
+
+    // 입력받은 데이터를 저장시킬 버튼
+    Button reply_input;
+
+    // 댓글갯수 입력하는 textview
+    TextView replies;
+    // DB 데이터를 보여줄 ListView
+    ListView Reply_listview;
+
+    ArrayAdapter<String> dataAdapter;
+
+    // DB 관련 변수
+    private FirebaseDatabase database3;
+    private DatabaseReference myRef3;
+
+    String userName;
 
 
+
+    InputMethodManager imm;
+    int cnt =0;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.detail_layout3);
+
+        replies = (TextView)findViewById(R.id.Replies);
 
         SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
         CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
 
-        mainLikeButton1 = (ImageView)findViewById(R.id.mainLikeButton1);
+
+        //firebase 변수 초기화
+        reply_text = (EditText)findViewById(R.id.reply_text);
+        reply_input = (Button)findViewById(R.id.reply_input);
+        Reply_listview = (ListView)findViewById(R.id.Reply_listview);
+
+        final ArrayList<String> list = new ArrayList<String>();
+
+        userName = "user"+ + new Random().nextInt(10000);
+
+        // DB 관련 변수 초기화
+        database3 = FirebaseDatabase.getInstance();
+        // message Reference가 없어도 상관 x
+        myRef3 = database3.getReference("message");
+
+        // ListView에 출력할 데이터 초기화
+        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
+
+        // ListView에 Adapter 붙여줌
+        Reply_listview.setAdapter(dataAdapter);
+        setListViewHeightBasedOnChildren(Reply_listview);
+
+        //댓글 갯수 표시
+        replies.setText("댓글("+dataAdapter.getCount()+")");
 
 
-        //*****************************리스트뷰 시작*************************************
-        listview_insa = (ListView) findViewById(R.id.listView_insa);
-        listView_Suwon = (ListView) findViewById(R.id.listView_Suwon);
-
-
-        adapter = new SingerAdapter();
-
-        adapter.addItem(new SingerItem("HOPES", "2017.06.29", R.drawable.star_big_on));
-        adapter.addItem(new SingerItem("삼일회계법인", "2017.06.29", R.drawable.star_big_on));
-        adapter.addItem(new SingerItem("삼정회계법인", "2017.06.28", R.drawable.star_big_off));
-        adapter.addItem(new SingerItem("대한무역투자진흥공사", "2017.06.01", R.drawable.star_big_off));
-        adapter.addItem(new SingerItem("네이버(주)", "2017.05.24", R.drawable.star_big_off));
-        adapter.addItem(new SingerItem("존슨앤드존슨", "2017.05.17", R.drawable.star_big_off));
-
-        listview_insa.setAdapter(adapter);
-
-
-        adapter2 = new SingerAdapter();
-
-        adapter2.addItem(new SingerItem("LG생활건강","2017.06.19", R.drawable.star_big_off));
-        adapter2.addItem(new SingerItem("지에스이피에스 주식회사","2017.06.08", R.drawable.star_big_off));
-        adapter2.addItem(new SingerItem("네이버(주)","2017.05.23", R.drawable.star_big_off));
-        adapter2.addItem(new SingerItem("한국전력기술","2017.05.08", R.drawable.star_big_off));
-
-        listView_Suwon.setAdapter(adapter2);
-
-        //---리스트뷰 클릭-----
-
-        listview_insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // 자신이 얻은 Reference에 이벤트를 붙여줌
+        // 데이터의 변화가 있을 때 출력해옴
+        myRef3.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SingerItem pos = (SingerItem) adapter.getItem(position);
-                if(pos.getName()=="HOPES"){
-                    Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
-                    startActivity(intent);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // 데이터를 읽어올 때 모든 데이터를 읽어오기때문에 List 를 초기화해주는 작업이 필요하다.
+                dataAdapter.clear();
+                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                    String msg = messageData.getValue().toString();
+                    dataAdapter.add(msg);
                 }
-                else{
-                    Intent intent = new Intent(getApplicationContext(),DetailActivity2.class);
-                    startActivity(intent);
-                }
+                // notifyDataSetChanged를 안해주면 ListView 갱신이 안됨
+                dataAdapter.notifyDataSetChanged();
+                setListViewHeightBasedOnChildren(Reply_listview);
+                replies.setText("댓글("+dataAdapter.getCount()+")");
+                // ListView 의 위치를 마지막으로 보내주기 위함
+                Reply_listview.setSelection(dataAdapter.getCount() - 1);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-        listView_Suwon.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+        // 버튼 리스너 정의
+        // 클릭시 EditText의 내용이 DB에 저장
+        reply_input.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),DetailActivity3.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                String replyDate = getDateString();
+                String str = reply_text.getText().toString().trim();
+                str = "<"+userName +">" + "  "+ replyDate +  "\n" + str ;
+
+                myRef3.push().setValue(str);
+                // EditText 초기화
+                reply_text.setText("");
+                dataAdapter.notifyDataSetChanged();
+                setListViewHeightBasedOnChildren(Reply_listview);
             }
         });
 
 
-        //*****************************리스트뷰 끝***************************************
 
 
-        //*****************************좌측 메뉴이동 시작********************************
+        //*****************************좌측 메뉴이동 시작*************************************
         Button Setting = (Button)findViewById(R.id.Setting);
         Setting.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -129,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         GotoMain.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -141,10 +186,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         //*****************************메뉴이동 끝 *************************************
 
         //*****************************우측 검색 및 필터 시작***************************
-        SearchV = (EditText)findViewById(R.id.searchV);
+
         Button SearchBtn = (Button)findViewById(R.id.CompanySearch);
         SearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -162,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         //****체크박스****
         final CheckBox cbAll = (CheckBox)findViewById(R.id.cbAll);
         final CheckBox cb1 = (CheckBox)findViewById(R.id.cb1);
@@ -212,87 +259,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //*****************************우측 검색 및 필터 끝*****************************
-
-        //*****************************인사자과선택*************************************
-        RadioButton Insa = (RadioButton)findViewById(R.id.Insa);
-        Insa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!isInsaCampus){
-                    if(isJagaCampus){
-                        listView_Suwon.setVisibility(View.INVISIBLE);
-                        isJagaCampus = false;
-                    }
-                    listview_insa.setVisibility(View.VISIBLE);
-                    isInsaCampus=true;
-                }
-            }
-        });
-        RadioButton Jaga = (RadioButton)findViewById(R.id.Jaga);
-        Jaga.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!isJagaCampus){
-                    if(isInsaCampus){
-                        listview_insa.setVisibility(View.INVISIBLE);
-                        isInsaCampus = false;
-                    }
-                    if(!isInsaCampus){
-                        listview_insa.setVisibility(View.INVISIBLE);
-                        isInsaCampus = false;
-                    }
-                    listView_Suwon.setVisibility(View.VISIBLE);
-                    isJagaCampus=true;
-                }
-            }
-        });
-        //*****************************인사자과선택 끝*************************************
-
     }
 
-    //*****************************리스트뷰 시작*************************************
-    class SingerAdapter extends BaseAdapter{
-        ArrayList<SingerItem> items = new ArrayList<SingerItem>();
-
-        @Override
-        public int getCount() {
-            return items.size();
+    //댓글 리스트뷰 길이를 설정해주는 method
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
         }
 
-        public void addItem(SingerItem item){
-            items.add(item);
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += listItem.getMeasuredHeight();
         }
 
-        @Override
-        public Object getItem(int position) {
-            return items.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public boolean isEnabled(int position) {
-            return true;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
-
-            SingerItemVIew view = new SingerItemVIew(getApplicationContext());
-            SingerItem item = items.get(position);
-
-
-            view.setDate(item.getDate());
-            view.setName(item.getName());
-            view.setImage(item.getResId());
-
-            return view;
-        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
-    //*****************************리스트뷰 끝***************************************
+
+    public String getDateString()
+    {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+        String str_date = df.format(new Date());
+
+        return str_date;
+    }
 
     //*****************************액션바 시작******************************************
 
@@ -327,7 +325,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //*****************************액션바 끝******************************************
-
 
     //*****************************메뉴바 열기 시작***************************************
     public void onSearchMenuClicked(View v){
@@ -368,8 +365,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //*****************************메뉴바 열기 끝***************************************
-
 }
-
-
-

@@ -63,23 +63,30 @@ public class FavoriteActivity extends AppCompatActivity {
 
 
 
-        adapter2.addItem(new SingerItem("자과좋아요1", "2017.05.18", R.drawable.star_big_on));
-        adapter2.addItem(new SingerItem("자과좋아요2", "2017.05.18", R.drawable.star_big_on));
-        adapter2.addItem(new SingerItem("자과좋아요3", "2017.05.18", R.drawable.star_big_on));
+        adapter2.addItem(new SingerItem("한화시스템(주)", "2017.04.13", R.drawable.star_big_on));
+        adapter2.addItem(new SingerItem("SK그룹", "2017.03.20", R.drawable.star_big_on));
+        adapter2.addItem(new SingerItem("삼성에스디에스", "2017.03.17", R.drawable.star_big_on));
 
         listView_Jaga.setAdapter(adapter2);
 
         listView_Insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
-                startActivity(intent);
+                SingerItem pos = (SingerItem) adapter.getItem(position);
+                if(pos.getName()=="HOPES"){
+                    Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(),DetailActivity2.class);
+                    startActivity(intent);
+                }
             }
         });
         listView_Jaga.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(),DetailActivity3.class);
                 startActivity(intent);
             }
         });

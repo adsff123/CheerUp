@@ -55,8 +55,8 @@ public class FilterActivity extends AppCompatActivity {
         adapter = new SingerAdapter();
         adapter2 = new SingerAdapter();
 
-        adapter.addItem(new SingerItem("롯데닷컴", "2017.05.18", R.drawable.star_big_on));
-        adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_on));
+        adapter.addItem(new SingerItem("삼정회계법인", "2017.06.28", R.drawable.star_big_off));
+        adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_off));
         adapter.addItem(new SingerItem("금융감독원", "2017.05.28", R.drawable.star_big_on));
 
         listView_Insa.setAdapter(adapter);
@@ -71,17 +71,24 @@ public class FilterActivity extends AppCompatActivity {
 
 
 
-        adapter2.addItem(new SingerItem("자과좋아요1", "2017.05.18", R.drawable.star_big_on));
-        adapter2.addItem(new SingerItem("자과좋아요2", "2017.05.18", R.drawable.star_big_on));
-        adapter2.addItem(new SingerItem("자과좋아요3", "2017.05.18", R.drawable.star_big_on));
+        adapter2.addItem(new SingerItem("LG생활건강","2017.06.19", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("지에스이피에스 주식회사","2017.06.08", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("네이버(주)","2017.05.23", R.drawable.star_big_on));
 
         listView_Jaga.setAdapter(adapter2);
 
         listView_Insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
-                startActivity(intent);
+                SingerItem pos = (SingerItem) adapter.getItem(position);
+                if(pos.getName()=="HOPES"){
+                    Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(),DetailActivity3.class);
+                    startActivity(intent);
+                }
             }
         });
         listView_Jaga.setOnItemClickListener(new AdapterView.OnItemClickListener(){

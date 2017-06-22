@@ -28,6 +28,8 @@
         <activity android:name=".SearchActivity"/>
         <activity android:name=".DetailActivity"
             android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".DetailActivity2"/>
+        <activity android:name=".DetailActivity3"/>
 
     </application>
 
