@@ -18,13 +18,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
-public class FavoriteActivity extends AppCompatActivity {
-
+public class FilterActivity extends AppCompatActivity {
     boolean isSearchMenuOpen =false;
     boolean isCategoryMenuOpen=false;
     RelativeLayout SearchMenu;
@@ -36,18 +36,17 @@ public class FavoriteActivity extends AppCompatActivity {
     boolean isJagaCampus = false;
     SingerAdapter adapter;
     SingerAdapter adapter2;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.favorite_list_layout);
+        setContentView(R.layout.filtered_layout);
 
         SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
         CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
 
         //*****************************리스트뷰 시작*************************************
-        listView_Insa = (ListView) findViewById(R.id.FavoritelistView_Insa);
-        listView_Jaga = (ListView) findViewById(R.id.FavoritelistView_Jaga);
+        listView_Insa = (ListView) findViewById(R.id.finished_Insa);
+        listView_Jaga = (ListView) findViewById(R.id.finished_Jaga);
 
         adapter = new SingerAdapter();
         adapter2 = new SingerAdapter();
@@ -75,6 +74,15 @@ public class FavoriteActivity extends AppCompatActivity {
         listView_Jaga.setAdapter(adapter2);
 
         //*****************************리스트뷰 끝***************************************
+        //*****************************취소버튼 시작*************************************
+        TextView CancelBtn = (TextView)findViewById(R.id.CancelBtn);
+        CancelBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        //*****************************취소버튼 끝*************************************
 
         //*****************************좌측 메뉴이동 시작*************************************
         Button Setting = (Button)findViewById(R.id.Setting);
@@ -110,7 +118,7 @@ public class FavoriteActivity extends AppCompatActivity {
             }
         });
 
-        //*****************************메뉴이동 끝 *************************************
+        //*****************************좌측 메뉴이동 끝 ********************************
         //*****************************우측 검색 및 필터 시작***************************
 
         Button SearchBtn = (Button)findViewById(R.id.CompanySearch);
@@ -167,8 +175,6 @@ public class FavoriteActivity extends AppCompatActivity {
         //*****************************인사자과선택 끝*************************************
 
     }
-
-
 
     //*****************************리스트뷰 시작*************************************
     class SingerAdapter extends BaseAdapter {
@@ -279,9 +285,4 @@ public class FavoriteActivity extends AppCompatActivity {
     }
 
     //*****************************메뉴바 열기 끝***************************************
-
-
-
 }
-
-

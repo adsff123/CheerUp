@@ -10,71 +10,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-
-
-public class FavoriteActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     boolean isSearchMenuOpen =false;
     boolean isCategoryMenuOpen=false;
     RelativeLayout SearchMenu;
     RelativeLayout CategoryMenu;
 
-    ListView listView_Insa;
-    ListView listView_Jaga;
-    boolean isInsaCampus = false;
-    boolean isJagaCampus = false;
-    SingerAdapter adapter;
-    SingerAdapter adapter2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.favorite_list_layout);
+        setContentView(R.layout.detail_layout);
 
         SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
         CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
-
-        //*****************************리스트뷰 시작*************************************
-        listView_Insa = (ListView) findViewById(R.id.FavoritelistView_Insa);
-        listView_Jaga = (ListView) findViewById(R.id.FavoritelistView_Jaga);
-
-        adapter = new SingerAdapter();
-        adapter2 = new SingerAdapter();
-
-        adapter.addItem(new SingerItem("금융감독원", "2017.05.18", R.drawable.star_big_on));
-        adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_on));
-        adapter.addItem(new SingerItem("(주)롯데그룹", "2017.06.08", R.drawable.star_big_on));
-
-        listView_Insa.setAdapter(adapter);
-
-        listView_Insa.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SingerItem item = (SingerItem) adapter.getItem(position);
-                Toast.makeText(getApplicationContext(), "선택 : " + item.getName(),Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-
-        adapter2.addItem(new SingerItem("자과좋아요1", "2017.05.18", R.drawable.star_big_on));
-        adapter2.addItem(new SingerItem("자과좋아요2", "2017.05.18", R.drawable.star_big_on));
-        adapter2.addItem(new SingerItem("자과좋아요3", "2017.05.18", R.drawable.star_big_on));
-
-        listView_Jaga.setAdapter(adapter2);
-
-        //*****************************리스트뷰 끝***************************************
 
         //*****************************좌측 메뉴이동 시작*************************************
         Button Setting = (Button)findViewById(R.id.Setting);
@@ -93,7 +47,7 @@ public class FavoriteActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button GotoMain = (Button)findViewById(R.id.GotoMain2);
+        Button GotoMain = (Button)findViewById(R.id.GotoMain);
         GotoMain.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -111,6 +65,7 @@ public class FavoriteActivity extends AppCompatActivity {
         });
 
         //*****************************메뉴이동 끝 *************************************
+
         //*****************************우측 검색 및 필터 시작***************************
 
         Button SearchBtn = (Button)findViewById(R.id.CompanySearch);
@@ -130,81 +85,8 @@ public class FavoriteActivity extends AppCompatActivity {
             }
         });
         //*****************************우측 검색 및 필터 끝*****************************
-
-        //*****************************인사자과선택*************************************
-        RadioButton Insa = (RadioButton)findViewById(R.id.Insa);
-        Insa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!isInsaCampus){
-                    if(isJagaCampus){
-                        listView_Jaga.setVisibility(View.INVISIBLE);
-                        isJagaCampus = false;
-                    }
-                    listView_Insa.setVisibility(View.VISIBLE);
-                    isInsaCampus=true;
-                }
-            }
-        });
-        RadioButton Jaga = (RadioButton)findViewById(R.id.Jaga);
-        Jaga.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!isJagaCampus){
-                    if(!isInsaCampus){
-                        listView_Insa.setVisibility(View.INVISIBLE);
-                        isInsaCampus = false;
-                    }
-                    if(isInsaCampus){
-                        listView_Insa.setVisibility(View.INVISIBLE);
-                        isInsaCampus = false;
-                    }
-                    listView_Jaga.setVisibility(View.VISIBLE);
-                    isJagaCampus=true;
-                }
-            }
-        });
-        //*****************************인사자과선택 끝*************************************
-
     }
 
-
-
-    //*****************************리스트뷰 시작*************************************
-    class SingerAdapter extends BaseAdapter {
-        ArrayList<SingerItem> items = new ArrayList<SingerItem>();
-
-        @Override
-        public int getCount() {
-            return items.size();
-        }
-
-        public void addItem(SingerItem item){
-            items.add(item);
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return items.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
-            SingerItemVIew view = new SingerItemVIew(getApplicationContext());
-            SingerItem item = items.get(position);
-            view.setName(item.getName());
-            view.setDate(item.getDate());
-            view.setImage(item.getResId());
-
-            return view;
-        }
-    }
-    //*****************************리스트뷰 끝***************************************
 
     //*****************************액션바 시작******************************************
 
@@ -279,9 +161,4 @@ public class FavoriteActivity extends AppCompatActivity {
     }
 
     //*****************************메뉴바 열기 끝***************************************
-
-
-
 }
-
-

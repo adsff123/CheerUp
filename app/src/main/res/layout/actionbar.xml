@@ -24,7 +24,7 @@
         android:onClick="onHomeButtonClicked" />
 
     <ImageButton
-        android:id="@+id/SearchButton"
+        android:id="@+id/CompanySearch"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"

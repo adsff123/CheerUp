@@ -109,6 +109,25 @@ public class FinishedActivity extends AppCompatActivity {
         });
 
         //*****************************메뉴이동 끝 *************************************
+        //*****************************우측 검색 및 필터 시작***************************
+
+        Button SearchBtn = (Button)findViewById(R.id.CompanySearch);
+        SearchBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button FilterBtn = (Button)findViewById(R.id.CompanyFilter);
+        FilterBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),FilterActivity.class);
+                startActivity(intent);
+            }
+        });
+        //*****************************우측 검색 및 필터 끝*****************************
 
         //*****************************인사자과선택*************************************
         RadioButton Insa = (RadioButton)findViewById(R.id.Insa);

@@ -1,36 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="org.androidtown.cheerup.MainActivity">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:descendantFocusability="afterDescendants">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="215dp"
+                android:layout_height="40dp"
+                android:layout_gravity="top"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="금융"
+                android:textAlignment="textEnd"
+                android:textColor="@color/Black"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/CancelBtn"
+                android:layout_width="99dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/textView2"
+                android:layout_marginEnd="14dp"
+                android:gravity="center"
+                android:text="취소"
+                android:textAlignment="center"
+                android:textColor="@color/DimGray"
+                android:textSize="25dp" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="279dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:gravity="center"
-            android:text="예정된 채용설명회"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/blackline" />
+
         <RadioGroup
-            android:checkedButton="@+id/Jaga"
             android:id="@+id/toggle"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/pink_out_line"
+            android:checkedButton="@+id/Jaga"
             android:orientation="horizontal">
 
             <RadioButton
@@ -49,17 +75,17 @@
                 android:textColor="#FFFFFFFF" />
 
             <RadioButton
-                android:layout_marginRight="1dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="1dp"
                 android:id="@+id/Jaga"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginTop="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/toggle_widget_background"
                 android:button="@null"
-                android:gravity="center"
                 android:checked="false"
+                android:gravity="center"
                 android:text="자과캠"
                 android:textColor="#FFFFFFFF" />
         </RadioGroup>
@@ -69,15 +95,14 @@
             android:layout_height="match_parent">
 
             <ListView
-                android:id="@+id/listView_insa"
+                android:id="@+id/finished_Insa"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:clickable="true">
+                android:layout_height="match_parent">
+
             </ListView>
 
             <ListView
-                android:id="@+id/listView_Suwon"
+                android:id="@+id/finished_Jaga"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="invisible" />
@@ -107,8 +132,8 @@
             android:hint="검색어를 입력하세요"
             android:inputType="text"
             android:linksClickable="false"
-            android:textColorHint="#FFFFFFFF"
-            android:textColor="#FFFFFFFF"/>
+            android:textColor="#FFFFFFFF"
+            android:textColorHint="#FFFFFFFF" />
 
         <Button
             android:id="@+id/CompanySearch"
@@ -134,7 +159,6 @@
             android:useDefaultMargins="true">
 
             <CheckBox
-                android:id="@+id/cbAll"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
@@ -310,7 +334,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/GotoMain"
+            android:id="@+id/GotoMain2"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -324,6 +348,5 @@
             android:textSize="24dp"
             android:textStyle="bold" />
     </RelativeLayout>
-
 
 </FrameLayout>

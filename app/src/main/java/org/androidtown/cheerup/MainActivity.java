@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         listview_insa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "hi",Toast.LENGTH_LONG).show();
-                System.out.println("hi");
+                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+                startActivity(intent);
             }
         });
         listView_Suwon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         //*****************************리스트뷰 끝***************************************
 
 
-        //*****************************좌측 메뉴이동 시작*************************************
+        //*****************************좌측 메뉴이동 시작********************************
         Button Setting = (Button)findViewById(R.id.Setting);
         Setting.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         GotoMain.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
                 startActivity(intent);
             }
         });
@@ -130,6 +130,27 @@ public class MainActivity extends AppCompatActivity {
 
         //*****************************메뉴이동 끝 *************************************
 
+        //*****************************우측 검색 및 필터 시작***************************
+
+        Button SearchBtn = (Button)findViewById(R.id.CompanySearch);
+        SearchBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button FilterBtn = (Button)findViewById(R.id.CompanyFilter);
+        FilterBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),FilterActivity.class);
+                startActivity(intent);
+            }
+        });
+        //****체크박스****
+
+        //*****************************우측 검색 및 필터 끝*****************************
         //*****************************인사자과선택*************************************
         RadioButton Insa = (RadioButton)findViewById(R.id.Insa);
         Insa.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //*****************************인사자과선택 끝*************************************
+
 
     }
 

@@ -206,9 +206,9 @@
             android:id="@+id/editText"
             android:layout_width="224dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/button"
+            android:layout_alignBottom="@+id/CompanySearch"
             android:layout_marginEnd="9dp"
-            android:layout_toStartOf="@+id/button"
+            android:layout_toStartOf="@+id/CompanySearch"
             android:contextClickable="false"
             android:cursorVisible="false"
             android:hint="검색어를 입력하세요"
@@ -218,7 +218,7 @@
             android:textColorHint="#FFFFFFFF" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/CompanySearch"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
@@ -232,7 +232,7 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button"
+            android:layout_below="@+id/CompanySearch"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:columnCount="3"
@@ -349,6 +349,7 @@
                 android:textStyle="bold" />
 
             <Button
+                android:id="@+id/CompanyFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_column="1"
