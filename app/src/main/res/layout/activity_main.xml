@@ -16,7 +16,7 @@
         android:descendantFocusability="afterDescendants">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/searchText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
@@ -97,7 +97,7 @@
         android:visibility="invisible">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/searchV"
             android:layout_width="224dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/CompanySearch"
@@ -108,8 +108,8 @@
             android:hint="검색어를 입력하세요"
             android:inputType="text"
             android:linksClickable="false"
-            android:textColorHint="#FFFFFFFF"
-            android:textColor="#FFFFFFFF"/>
+            android:textColor="#FFFFFFFF"
+            android:textColorHint="#FFFFFFFF" />
 
         <Button
             android:id="@+id/CompanySearch"

@@ -21,6 +21,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +40,8 @@ public class DetailActivity extends AppCompatActivity {
     RelativeLayout SearchMenu;
     RelativeLayout CategoryMenu;
 
+    EditText SearchV;
+
     //*************firebase를 이용한 댓글*******************
     // DB에 저장시킬 데이터를 입력받는 EditText
     private EditText reply_text;
@@ -46,6 +49,8 @@ public class DetailActivity extends AppCompatActivity {
     // 입력받은 데이터를 저장시킬 버튼
     Button reply_input;
 
+    // 댓글갯수 입력하는 textview
+    TextView replies;
     // DB 데이터를 보여줄 ListView
     ListView Reply_listview;
 
@@ -58,12 +63,15 @@ public class DetailActivity extends AppCompatActivity {
     String userName;
 
     InputMethodManager imm;
+    int cnt =0;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_layout);
+
+        replies = (TextView)findViewById(R.id.Replies);
 
         SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
         CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
@@ -89,6 +97,7 @@ public class DetailActivity extends AppCompatActivity {
         // ListView에 Adapter 붙여줌
         Reply_listview.setAdapter(dataAdapter);
         setListViewHeightBasedOnChildren(Reply_listview);
+        replies.setText("댓글("+dataAdapter.getCount()+")");
 
 
         // 자신이 얻은 Reference에 이벤트를 붙여줌
@@ -105,6 +114,7 @@ public class DetailActivity extends AppCompatActivity {
                 // notifyDataSetChanged를 안해주면 ListView 갱신이 안됨
                 dataAdapter.notifyDataSetChanged();
                 setListViewHeightBasedOnChildren(Reply_listview);
+                replies.setText("댓글("+dataAdapter.getCount()+")");
                 // ListView 의 위치를 마지막으로 보내주기 위함
                 Reply_listview.setSelection(dataAdapter.getCount() - 1);
 
@@ -127,7 +137,6 @@ public class DetailActivity extends AppCompatActivity {
                 reply_text.setText("");
                 dataAdapter.notifyDataSetChanged();
                 setListViewHeightBasedOnChildren(Reply_listview);
-
             }
         });
 
@@ -175,6 +184,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+                intent.putExtra("SearchValue",SearchV.getText().toString());
                 startActivity(intent);
             }
         });

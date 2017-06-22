@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -21,6 +22,8 @@ public class SettingActivity extends AppCompatActivity {
     boolean isCategoryMenuOpen=false;
     RelativeLayout SearchMenu;
     RelativeLayout CategoryMenu;
+
+    EditText SearchV;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+                intent.putExtra("SearchValue",SearchV.getText().toString());
                 startActivity(intent);
             }
         });

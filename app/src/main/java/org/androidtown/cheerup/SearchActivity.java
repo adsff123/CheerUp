@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -37,10 +38,21 @@ public class SearchActivity extends AppCompatActivity {
     boolean isJagaCampus = false;
     SingerAdapter adapter;
     SingerAdapter adapter2;
+
+    String getValue;
+    TextView SearchText;
+
+    EditText SearchV;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searched_layout);
+
+        Intent intentvalue = getIntent();
+        getValue = intentvalue.getStringExtra("SearchValue");
+        SearchText = (TextView)findViewById(R.id.searchText);
+        SearchText.setText(getValue);
+
 
         SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
         CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
@@ -52,9 +64,9 @@ public class SearchActivity extends AppCompatActivity {
         adapter = new SingerAdapter();
         adapter2 = new SingerAdapter();
 
-        adapter.addItem(new SingerItem("금융감독원", "2017.05.18", R.drawable.star_big_on));
-        adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_on));
-        adapter.addItem(new SingerItem("(주)롯데그룹", "2017.06.08", R.drawable.star_big_on));
+        adapter.addItem(new SingerItem("hiCompany-1", "2017.05.18", R.drawable.star_big_off));
+        adapter.addItem(new SingerItem("hiCompany-2", "2017.05.27", R.drawable.star_big_off));
+        adapter.addItem(new SingerItem("hiCompany-3", "2017.06.08", R.drawable.star_big_on));
 
         listView_Insa.setAdapter(adapter);
 
@@ -68,9 +80,9 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-        adapter2.addItem(new SingerItem("자과좋아요1", "2017.05.18", R.drawable.star_big_on));
-        adapter2.addItem(new SingerItem("자과좋아요2", "2017.05.18", R.drawable.star_big_on));
-        adapter2.addItem(new SingerItem("자과좋아요3", "2017.05.18", R.drawable.star_big_on));
+        adapter2.addItem(new SingerItem("suwon-hi-1", "2017.05.18", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("suwon-hi-2", "2017.05.18", R.drawable.star_big_off));
+        adapter2.addItem(new SingerItem("suwon-hi-3", "2017.05.18", R.drawable.star_big_off));
 
         listView_Jaga.setAdapter(adapter2);
 
@@ -128,6 +140,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+                intent.putExtra("SearchValue",SearchV.getText().toString());
                 startActivity(intent);
             }
         });

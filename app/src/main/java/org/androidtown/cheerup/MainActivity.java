@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout CategoryMenu;
     ListView listView_Suwon;
     ListView listview_insa;
+
+    EditText SearchV;
 
 
 
@@ -133,11 +136,13 @@ public class MainActivity extends AppCompatActivity {
         //*****************************메뉴이동 끝 *************************************
 
         //*****************************우측 검색 및 필터 시작***************************
+        SearchV = (EditText)findViewById(R.id.searchV);
         Button SearchBtn = (Button)findViewById(R.id.CompanySearch);
         SearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+                intent.putExtra("SearchValue",SearchV.getText().toString());
                 startActivity(intent);
             }
         });

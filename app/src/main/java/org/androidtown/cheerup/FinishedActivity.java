@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -35,6 +36,8 @@ public class FinishedActivity extends AppCompatActivity {
     boolean isJagaCampus = false;
     SingerAdapter adapter;
     SingerAdapter adapter2;
+
+    EditText SearchV;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,6 +120,7 @@ public class FinishedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+                intent.putExtra("SearchValue",SearchV.getText().toString());
                 startActivity(intent);
             }
         });
