@@ -130,11 +130,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         //*****************************메뉴이동 끝 *************************************
 
         //*****************************우측 검색 및 필터 시작***************************
-
         Button SearchBtn = (Button)findViewById(R.id.CompanySearch);
         SearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -200,8 +198,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         //*****************************우측 검색 및 필터 끝*****************************
+
         //*****************************인사자과선택*************************************
         RadioButton Insa = (RadioButton)findViewById(R.id.Insa);
         Insa.setOnClickListener(new View.OnClickListener() {
@@ -237,12 +235,7 @@ public class MainActivity extends AppCompatActivity {
         });
         //*****************************인사자과선택 끝*************************************
 
-
     }
-
-
-
-
 
     //*****************************리스트뷰 시작*************************************
     class SingerAdapter extends BaseAdapter{
@@ -284,14 +277,9 @@ public class MainActivity extends AppCompatActivity {
             view.setImage(item.getResId());
 
             return view;
-
         }
     }
     //*****************************리스트뷰 끝***************************************
-
-
-
-
 
     //*****************************액션바 시작******************************************
 
@@ -326,6 +314,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //*****************************액션바 끝******************************************
+
 
     //*****************************메뉴바 열기 시작***************************************
     public void onSearchMenuClicked(View v){
