@@ -22,7 +22,9 @@
             android:gravity="center"
             android:text="예정된 채용설명회"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textSize="30dp"
+            android:textColor="@color/Black"
+            android:layout_marginTop="5dp"/>
         <RadioGroup
             android:checkedButton="@+id/Jaga"
             android:id="@+id/toggle"

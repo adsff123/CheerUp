@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listview_insa;
 
     EditText SearchV;
+    ImageView mainLikeButton1;
 
 
 
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         SearchMenu = (RelativeLayout) findViewById(R.id.searchMenu);
         CategoryMenu = (RelativeLayout) findViewById(R.id.CategoryMenu);
 
+        mainLikeButton1 = (ImageView)findViewById(R.id.mainLikeButton1);
+
 
         //*****************************리스트뷰 시작*************************************
         listview_insa = (ListView) findViewById(R.id.listView_insa);
@@ -57,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new SingerAdapter();
 
-        adapter.addItem(new SingerItem("롯데닷컴", "2017.05.18", R.drawable.star_big_off));
-        adapter.addItem(new SingerItem("(주)한국존슨앤드존슨", "2017.05.20", R.drawable.star_big_off));
+        adapter.addItem(new SingerItem("롯데닷컴", "2017.05.18", R.drawable.star_big_on));
+        adapter.addItem(new SingerItem("(주)한국존슨앤드존슨", "2017.05.20", R.drawable.star_big_on));
         adapter.addItem(new SingerItem("한국주택금융공사", "2017.05.25", R.drawable.star_big_off));
         adapter.addItem(new SingerItem("한영회계법인", "2017.05.27", R.drawable.star_big_off));
         adapter.addItem(new SingerItem("삼천리", "2017.06.02", R.drawable.star_big_off));
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         //*****************************리스트뷰 끝***************************************
 

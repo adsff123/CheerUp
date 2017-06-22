@@ -29,7 +29,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class DetailActivity extends AppCompatActivity {
@@ -61,6 +64,8 @@ public class DetailActivity extends AppCompatActivity {
     private DatabaseReference myRef;
 
     String userName;
+
+
 
     InputMethodManager imm;
     int cnt =0;
@@ -97,6 +102,8 @@ public class DetailActivity extends AppCompatActivity {
         // ListView에 Adapter 붙여줌
         Reply_listview.setAdapter(dataAdapter);
         setListViewHeightBasedOnChildren(Reply_listview);
+
+        //댓글 갯수 표시
         replies.setText("댓글("+dataAdapter.getCount()+")");
 
 
@@ -131,7 +138,10 @@ public class DetailActivity extends AppCompatActivity {
         reply_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String replyDate = getDateString();
                 String str = reply_text.getText().toString().trim();
+                str = "<"+userName +">" + "  "+ replyDate +  "\n" + str ;
+
                 myRef.push().setValue(str);
                 // EditText 초기화
                 reply_text.setText("");
@@ -139,6 +149,8 @@ public class DetailActivity extends AppCompatActivity {
                 setListViewHeightBasedOnChildren(Reply_listview);
             }
         });
+
+
 
 
         //*****************************좌측 메뉴이동 시작*************************************
@@ -249,6 +261,7 @@ public class DetailActivity extends AppCompatActivity {
         //*****************************우측 검색 및 필터 끝*****************************
     }
 
+    //댓글 리스트뷰 길이를 설정해주는 method
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
@@ -271,6 +284,13 @@ public class DetailActivity extends AppCompatActivity {
         listView.requestLayout();
     }
 
+    public String getDateString()
+    {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+        String str_date = df.format(new Date());
+
+        return str_date;
+    }
 
     //*****************************액션바 시작******************************************
 

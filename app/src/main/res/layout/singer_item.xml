@@ -43,6 +43,7 @@
             android:layout_marginStart="56dp"
             android:gravity="center"
             android:text="금융감독원"
+            android:textColor="@color/Black"
             android:textSize="27dp"
             android:clickable="false"
             android:focusable="false"
@@ -55,9 +56,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0.42"
             app:srcCompat="@android:drawable/star_big_off"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            />
 
     </LinearLayout>
 
