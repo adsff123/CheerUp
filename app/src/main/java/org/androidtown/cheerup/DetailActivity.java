@@ -10,13 +10,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,9 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class DetailActivity extends AppCompatActivity {
 
+    ScrollView scrollView;
     boolean isSearchMenuOpen =false;
     boolean isCategoryMenuOpen=false;
     RelativeLayout SearchMenu;
@@ -38,18 +44,20 @@ public class DetailActivity extends AppCompatActivity {
     private EditText reply_text;
 
     // 입력받은 데이터를 저장시킬 버튼
-    private Button reply_input;
+    Button reply_input;
 
     // DB 데이터를 보여줄 ListView
-    private ListView Reply_listview;
+    ListView Reply_listview;
 
-    private ArrayAdapter<String> dataAdapter;
+    ArrayAdapter<String> dataAdapter;
 
     // DB 관련 변수
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
+    String userName;
 
+    InputMethodManager imm;
 
 
     @Override
@@ -66,16 +74,21 @@ public class DetailActivity extends AppCompatActivity {
         reply_input = (Button)findViewById(R.id.reply_input);
         Reply_listview = (ListView)findViewById(R.id.Reply_listview);
 
+        final ArrayList<String> list = new ArrayList<String>();
+
+        userName = "user"+ + new Random().nextInt(10000);
+
         // DB 관련 변수 초기화
         database = FirebaseDatabase.getInstance();
         // message Reference가 없어도 상관 x
         myRef = database.getReference("message");
 
         // ListView에 출력할 데이터 초기화
-        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, new ArrayList<String>());
+        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
 
         // ListView에 Adapter 붙여줌
         Reply_listview.setAdapter(dataAdapter);
+        setListViewHeightBasedOnChildren(Reply_listview);
 
 
         // 자신이 얻은 Reference에 이벤트를 붙여줌
@@ -91,8 +104,10 @@ public class DetailActivity extends AppCompatActivity {
                 }
                 // notifyDataSetChanged를 안해주면 ListView 갱신이 안됨
                 dataAdapter.notifyDataSetChanged();
+                setListViewHeightBasedOnChildren(Reply_listview);
                 // ListView 의 위치를 마지막으로 보내주기 위함
                 Reply_listview.setSelection(dataAdapter.getCount() - 1);
+
             }
 
             @Override
@@ -107,12 +122,12 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String str = reply_text.getText().toString().trim();
-                // push는 firebase가 임의로 중복되지 않은 키를 생성해서 저장
-                // push로 하지 않을 경우 덮어 씌움
                 myRef.push().setValue(str);
-
                 // EditText 초기화
                 reply_text.setText("");
+                dataAdapter.notifyDataSetChanged();
+                setListViewHeightBasedOnChildren(Reply_listview);
+
             }
         });
 
@@ -222,6 +237,28 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
         //*****************************우측 검색 및 필터 끝*****************************
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 
 
